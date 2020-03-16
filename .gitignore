@@ -1,0 +1,17 @@
+# possible file names of the build log
+/Build.Log.txt
+/Success.Log.txt
+/Error.Log.txt
+
+# NuGet executable and packages
+/tools/NuGet/nuget.exe
+/src/packages
+
+# compiled output from the project
+/src/HelloWorld/bin
+/src/HelloWorld/obj
+
+# destination of compiled outputs
+/Build
+
+/src/.vs

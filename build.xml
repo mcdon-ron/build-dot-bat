@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets='GatherBinaries' xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+
+    <!--
+        Skip RestorePackages when building from VSTS.
+        VSTS has it's own package restore that authenticates against VSTS package source.
+        The variable VSTSBuild would have to be defined in the VSTS build definition.
+    -->
+    <Target Name='RestorePackages' Condition="'$(VSTSBuild)'!='True'">
+        <MakeDir Directories='tools\NuGet'/>
+        <!-- tools could be added to source control, or could be downloaded during the build -->
+
+        <!-- later versions of MSBuild include the "DownloadFile" task https://docs.microsoft.com/en-us/visualstudio/msbuild/downloadfile-task?view=vs-2017 -->
+        <DownloadFile SourceUrl='https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' DestinationFolder='tools\NuGet'/>
+
+        <!-- command line options for downloading a file based on https://stackoverflow.com/a/28143180/135280 -->
+        <!-- Windows 10 antivirus got spooked using certutil like this, though it didn't complain about using bitsadmin -->
+        <!-- <Exec Command='certutil.exe -urlcache -split -f "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" "tools\NuGet\nuget.exe"'/> -->
+        <!-- <Exec Command='bitsadmin /transfer myDownload /download /priority normal "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" "tools\NuGet\nuget.exe'/> -->
+
+        <Exec Command='tools\NuGet\NuGet.exe restore "src\HelloWorld.sln"'/>
+    </Target>
+
+    <!--
+        Restoring packages prior to cleaning
+        work around for issue with package "Microsoft.Bcl.Build.1.0.10"
+            error: The build restored NuGet packages. Build the project again to include these packages in the build
+    -->
+    <Target Name='Clean' DependsOnTargets='RestorePackages'>
+        <RemoveDir Directories='Build'/>
+        <MSBuild Projects='src\HelloWorld.sln' Targets='Clean' Properties='Configuration=Release;Platform=Any CPU'/>
+    </Target>
+
+    <Target Name='Build' DependsOnTargets='Clean;RestorePackages'>
+        <MSBuild Projects='src\HelloWorld.sln' Targets='Build' Properties='Configuration=Release;Platform=Any CPU'/>
+    </Target>
+
+    <Target Name='GatherBinaries' DependsOnTargets='Build' Condition="'$(VSTSBuild)'!='True'">
+        <MakeDir Directories='Build'/>
+        <ItemGroup>
+            <OutputFiles Include="src\HelloWorld\bin\Release\**\*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(OutputFiles)" DestinationFolder="Build\%(RecursiveDir)" SkipUnchangedFiles="true" />
+        <!-- example of publishing a web app -->
+        <!-- <MSBuild Projects='src\MVC\MyWebApp.csproj' Targets='PipelinePreDeployCopyAllFilesToOneFolder' -->
+            <!-- Properties='Configuration=Release;Platform=Any CPU;OutputPath=bin\;PipelineDependsOnBuild=False;_PackageTempDir=Build\MVC\MyWebApp'/> -->
+    </Target>
+
+</Project>

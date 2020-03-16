@@ -14,7 +14,7 @@ set "bdb_BuildLog=Build.Log.txt"
 rem the log file will be renamed
 rem depending on if the build succeeds or fails
 set "bdb_SuccessLog=Success.Log.txt"
-set "bdb_ErrorLog=MerrError.Log.txt"
+set "bdb_ErrorLog=Error.Log.txt"
 
 rem delete old log files
 call:TryDelete "%bdb_BuildLog%"

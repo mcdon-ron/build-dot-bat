@@ -2,7 +2,7 @@
 setlocal
 
 rem if run as administrator the working directory is "C:\WINDOWS\system32"
-rem using popd to switch to the bat file's directory
+rem using pushd to switch to the bat file's directory
 pushd "%~dp0"
 
 rem the build script to run

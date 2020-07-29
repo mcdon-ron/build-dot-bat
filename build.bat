@@ -83,6 +83,8 @@ goto:eof
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\MSBuild\12.0\Bin"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\MSBuild\14.0\Bin\amd64"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\MSBuild\14.0\Bin"
+    call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64"
+    call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\amd64"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\amd64"

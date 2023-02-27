@@ -75,14 +75,19 @@ goto:eof
 
     call:SetMsBuild bdb_MsBuildPath "%WinDir%\Microsoft.NET\Framework64\v2.0.50727"
     call:SetMsBuild bdb_MsBuildPath "%WinDir%\Microsoft.NET\Framework\v2.0.50727"
+
     call:SetMsBuild bdb_MsBuildPath "%WinDir%\Microsoft.NET\Framework64\v3.5"
     call:SetMsBuild bdb_MsBuildPath "%WinDir%\Microsoft.NET\Framework\v3.5"
+
     call:SetMsBuild bdb_MsBuildPath "%WinDir%\Microsoft.NET\Framework64\v4.0.30319"
     call:SetMsBuild bdb_MsBuildPath "%WinDir%\Microsoft.NET\Framework\v4.0.30319"
+
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\MSBuild\12.0\Bin\amd64"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\MSBuild\12.0\Bin"
+
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\MSBuild\14.0\Bin\amd64"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\MSBuild\14.0\Bin"
+
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\amd64"
@@ -91,6 +96,7 @@ goto:eof
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\amd64"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
+
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\amd64"
@@ -99,6 +105,15 @@ goto:eof
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\amd64"
     call:SetMsBuild bdb_MsBuildPath "%bdb_pFiles%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin"
+
+    call:SetMsBuild bdb_MsBuildPath "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64"
+    call:SetMsBuild bdb_MsBuildPath "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin"
+    call:SetMsBuild bdb_MsBuildPath "%ProgramFiles%\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\amd64"
+    call:SetMsBuild bdb_MsBuildPath "%ProgramFiles%\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin"
+    call:SetMsBuild bdb_MsBuildPath "%ProgramFiles%\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\amd64"
+    call:SetMsBuild bdb_MsBuildPath "%ProgramFiles%\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin"
+    call:SetMsBuild bdb_MsBuildPath "%ProgramFiles%\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64"
+    call:SetMsBuild bdb_MsBuildPath "%ProgramFiles%\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin"
 
     (
         endlocal

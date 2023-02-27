@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets='GatherBinaries' xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+    <PropertyGroup>
+        <SolutionPath>src\HelloWorld.sln</SolutionPath>
+        <BinaryOutputFolder>src\HelloWorld\bin\Release</BinaryOutputFolder>
+    </PropertyGroup>
 
     <!--
         Skip RestorePackages when building from VSTS.
@@ -18,7 +22,7 @@
         <!-- <Exec Command='certutil.exe -urlcache -split -f "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" "tools\NuGet\nuget.exe"'/> -->
         <!-- <Exec Command='bitsadmin /transfer myDownload /download /priority normal "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" "tools\NuGet\nuget.exe'/> -->
 
-        <Exec Command='tools\NuGet\NuGet.exe restore "src\HelloWorld.sln"'/>
+        <Exec Command='tools\NuGet\NuGet.exe restore "$(SolutionPath)"'/>
     </Target>
 
     <!--
@@ -28,22 +32,22 @@
     -->
     <Target Name='Clean' DependsOnTargets='RestorePackages'>
         <RemoveDir Directories='Build'/>
-        <MSBuild Projects='src\HelloWorld.sln' Targets='Clean' Properties='Configuration=Release;Platform=Any CPU'/>
+        <MSBuild Projects='$(SolutionPath)' Targets='Clean' Properties='Configuration=Release;Platform=Any CPU'/>
     </Target>
 
     <Target Name='Build' DependsOnTargets='Clean;RestorePackages'>
-        <MSBuild Projects='src\HelloWorld.sln' Targets='Build' Properties='Configuration=Release;Platform=Any CPU'/>
+        <MSBuild Projects='$(SolutionPath)' Targets='Build' Properties='Configuration=Release;Platform=Any CPU'/>
     </Target>
 
     <Target Name='GatherBinaries' DependsOnTargets='Build' Condition="'$(VSTSBuild)'!='True'">
-        <MakeDir Directories='Build'/>
+        <MakeDir Directories='build'/>
         <ItemGroup>
-            <OutputFiles Include="src\HelloWorld\bin\Release\**\*.*" />
+            <OutputFiles Include="$(BinaryOutputFolder)\**\*.*" />
         </ItemGroup>
-        <Copy SourceFiles="@(OutputFiles)" DestinationFolder="Build\%(RecursiveDir)" SkipUnchangedFiles="true" />
+        <Copy SourceFiles="@(OutputFiles)" DestinationFolder="build\%(RecursiveDir)" SkipUnchangedFiles="true" />
         <!-- example of publishing a web app -->
         <!-- <MSBuild Projects='src\MVC\MyWebApp.csproj' Targets='PipelinePreDeployCopyAllFilesToOneFolder' -->
-            <!-- Properties='Configuration=Release;Platform=Any CPU;OutputPath=bin\;PipelineDependsOnBuild=False;_PackageTempDir=Build\MVC\MyWebApp'/> -->
+            <!-- Properties='Configuration=Release;Platform=Any CPU;OutputPath=bin\;PipelineDependsOnBuild=False;_PackageTempDir=build\MVC\MyWebApp'/> -->
     </Target>
 
 </Project>
